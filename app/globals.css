@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+
+@font-face {
+  font-family: 'Bandeins Strange Variable';
+  src: url('/fonts/BandeinsStrangeVariable.ttf') format('truetype');
+  font-weight: 1 1000;
+  font-stretch: 75% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  overflow-x: hidden;
+}
+
+
+/* Set global font */
+html {
+  font-family: 'Bandeins Strange Variable', sans-serif;
+}
+
+/* html, body {
+  height: 100%;
+  overflow-x: hidden;
+} */
+
+.sub-heading {
+  font-family: 'Almarai', sans-serif;
+}
+
+body {
+  font-family: 'Bandeins Strange Variable', sans-serif;
+  padding: 0%;
+  margin: 0%;
+}
+
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #000000;
+} */
+
+
+@layer utilities {
+  .shimmer-effect {
+    background: linear-gradient(
+      90deg,
+      #f0f0f0 0%,
+      #e0e0e0 50%,
+      #f0f0f0 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+}

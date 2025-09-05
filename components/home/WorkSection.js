@@ -90,7 +90,7 @@ const WorkSection = () => {
 
         <div
           ref={containerRef}
-          className="grid grid-cols-2 lg:grid-cols-7 w-full md:pl-8 pl-5 items-center justify-items-center gap-8"
+          className="grid grid-cols-2 lg:grid-cols-7 w-full md:pl-11 pl-5 items-center justify-items-center-safe gap-8"
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}

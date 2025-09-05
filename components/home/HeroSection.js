@@ -20,8 +20,9 @@ export default function HeroSection() {
   const tabletTextRef = useRef(null);
   const [isHeroLoaded, setIsHeroLoaded] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
- const [logoMaskYOffset, setLogoMaskYOffset] = useState(200);
- const [logoMaskScale, setLogoMaskScale] = useState(12);
+  const [logoMaskYOffset, setLogoMaskYOffset] = useState(0);
+  const [logoMaskScale, setLogoMaskScale] = useState(0);
+
 
   // GSAP animations for large screens
   useEffect(() => {
@@ -30,13 +31,18 @@ export default function HeroSection() {
     const video = videoRef.current;
     const secondVideo = secondVideoRef.current;
 
-    setLogoMaskYOffset(window?.innerHeight * 0.17 ?? 200);
-    setLogoMaskScale(window?.innerWidth * 0.0064 ?? 12);
-
     if (!section || !path || !video || !secondVideo) return;
 
     // Only run GSAP on large screens
     if (window.innerWidth < 1024) return;
+
+    const yOffset = window.innerHeight * 0.17;
+    const Scale = window.innerWidth * 0.0064;
+    
+    setTimeout(() => {
+      setLogoMaskYOffset(yOffset);
+      setLogoMaskScale(Scale);
+    }, 300);
 
     requestAnimationFrame(() => {
       const pathBounds = path.getBBox();
@@ -51,7 +57,7 @@ export default function HeroSection() {
       const textElements = document.querySelectorAll(".text-fade");
       const contentOverlay = contentOverlayRef.current;
 
-      gsap.set(path, { attr: { transform: `translate(${startX}, ${logoMaskYOffset}) scale(${logoMaskScale})` } });
+      gsap.set(path, { attr: { transform: `translate(${startX}, ${yOffset}) scale(${Scale})` } });
       gsap.set(video, {
         y: 0,
         height: "100vh",
@@ -102,7 +108,7 @@ export default function HeroSection() {
 
       // Path animation (first 70% of timeline) - horizontal scroll
       tl.to(path, {
-        attr: { transform: `translate(${endX}, ${logoMaskYOffset}) scale(${logoMaskScale})` },
+        attr: { transform: `translate(${endX}, ${yOffset}) scale(${Scale})` },
         ease: "power1.out",
         duration: 0.7,
       })
@@ -320,7 +326,7 @@ export default function HeroSection() {
                     y="0"
                     width="100%"
                     height="100%"
-                    maskUnits="userSpaceOnUse"
+                    maskUnits="objectBoundingBox"
                   >
                     <rect x="0" y="0" width="100%" height="100%" fill="white" />
                     <path

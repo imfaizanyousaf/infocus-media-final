@@ -15,6 +15,126 @@ export default function TabletSection() {
   const mobileTextSectionRef = useRef(null);
   const mobileSectionRef = useRef(null);
 
+  // Desktop refs
+  const desktopSectionRef = useRef(null);
+  const desktopVideoRef = useRef(null);
+  const desktopContentOverlayRef = useRef(null);
+  const desktopTextSectionRef = useRef(null);
+
+  // Desktop video animation
+  useEffect(() => {
+    const desktopSection = desktopSectionRef.current;
+    const video = desktopVideoRef.current;
+    const contentOverlay = desktopContentOverlayRef.current;
+    const desktopTextSection = desktopTextSectionRef.current;
+
+    if (!desktopSection || !video || !contentOverlay || !desktopTextSection || window.innerWidth < 768 || window.innerWidth >= 1024) return;
+
+    // Get content elements
+    const logo = contentOverlay.querySelector(".logo-fade");
+    const textElements = contentOverlay.querySelectorAll(".text-fade");
+    const desktopTextElement = desktopTextSection.querySelector(".desktop-text");
+
+    // Initial setup
+    gsap.set(video, {
+      y: "100vh", // Start below viewport
+      height: "100vh",
+      width: "100vw",
+      objectFit: "cover",
+    });
+
+    // Hide content initially
+    if (logo) gsap.set(logo, { opacity: 0, y: 50 });
+    if (textElements.length) {
+      gsap.set(textElements, { opacity: 0, y: 30 });
+    }
+
+    // Position content overlay with video
+    gsap.set(contentOverlay, {
+      y: "100vh",
+    });
+
+    // Set initial text position
+    if (desktopTextElement) {
+      const textOffset = window.innerHeight * 0.3
+      gsap.set(desktopTextElement, { 
+        y: textOffset // Desktop uses normal vertical positioning
+      });
+    }
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: desktopSection,
+        start: "top top",
+        end: "+=1000", // Shorter for tablet
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          
+          // Hide navbar when video starts moving but show it after animation completes
+          if (progress < 0.7) {
+            setIsNavbarVisible(true); // Show navbar during text scroll phase
+          } else if (progress >= 0.7 && progress < 1.0) {
+            setIsNavbarVisible(false); // Hide navbar during video transition
+          } else {
+            setIsNavbarVisible(true); // Show navbar after animation completes
+          }
+          
+          // Text scrolling animation (0% to 80%)
+          if (desktopTextElement && progress <= 0.7) {
+            const textProgress = progress / 0.7;
+            const initialOffset = window.innerHeight * 0.3
+            const textY = initialOffset - (textProgress * window.innerHeight * 1.3); // Scroll text up
+            gsap.set(desktopTextElement, { y: textY });
+          }
+
+          // Video moves up from bottom (80% to 100%)
+          if (progress >= 0.7) {
+            const videoProgress = (progress - 0.7) / 0.3;
+            const videoY = (1 - videoProgress) * window.innerHeight;
+            
+            gsap.set(video, { y: videoY });
+            gsap.set(contentOverlay, { y: videoY });
+          }
+
+          // Content fade in animation (90% to 95%)
+          if (progress >= 0.9 && progress <= 0.95) {
+            const contentProgress = (progress - 0.9) / 0.05;
+            
+            // Logo fades in first
+            if (logo) {
+              gsap.set(logo, {
+                opacity: contentProgress,
+                y: 50 * (1 - contentProgress),
+              });
+            }
+            
+            // Text elements fade in with stagger
+            if (textElements.length) {
+              textElements.forEach((el, index) => {
+                const staggerDelay = index * 0.3;
+                const adjustedProgress = Math.max(0, Math.min(1, (contentProgress - staggerDelay) / (1 - staggerDelay)));
+                
+                gsap.set(el, {
+                  opacity: adjustedProgress,
+                  y: 30 * (1 - adjustedProgress),
+                });
+              });
+            }
+          }
+        },
+      },
+    });
+
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      setIsNavbarVisible(true);
+    };
+  }, [setIsNavbarVisible]);
+
   // Mobile video animation
   useEffect(() => {
     const mobileSection = mobileSectionRef.current;
@@ -51,7 +171,7 @@ export default function TabletSection() {
     // Set initial text position - position to show "I" first
     if (mobileTextElement) {
       // Calculate offset to show "I" at the start, with extra whitespace above if needed
-      const textOffset = window.innerHeight * 1.1; // Start further down to show "I" first
+      const textOffset = window.innerHeight * 1.03; // Start further down to show "I" first
       gsap.set(mobileTextElement, { 
         y: textOffset // Since text is rotated 90deg, y controls horizontal position
       });
@@ -78,17 +198,17 @@ export default function TabletSection() {
           }
           
           // Text scrolling animation (0% to 70%) - moves up vertically (bottom to top)
-          if (mobileTextElement && progress <= 0.7) {
-            const textProgress = progress / 0.7;
+          if (mobileTextElement && progress <= 0.8) {
+            const textProgress = progress / 0.8;
             // Since text is rotated 90deg, y controls horizontal movement
-            const initialOffset = window.innerHeight * 1.1; // Start further down to show "I" first
-            const textY = initialOffset - (textProgress * window.innerHeight * 1.8); // Faster scroll with more distance
+            const initialOffset = window.innerHeight * 1.03; // Start further down to show "I" first
+            const textY = initialOffset - (textProgress * window.innerHeight * 1.95); // Faster scroll with more distance
             gsap.set(mobileTextElement, { y: textY });
           }
           
           // Video moves up from bottom (70% to 100%) - like desktop secondVideo
-          if (progress >= 0.7) {
-            const videoProgress = (progress - 0.7) / 0.3; // 0.7 to 1.0 becomes 0 to 1
+          if (progress >=0.8) {
+            const videoProgress = (progress -0.8) / 0.2; // 0.7 to 1.0 becomes 0 to 1
             const videoY = (1 - videoProgress) * window.innerHeight;
             
             gsap.set(video, { y: videoY });
@@ -135,14 +255,75 @@ export default function TabletSection() {
     <div
       className="relative w-screen overflow-hidden"
     >
-      
+      {/* Desktop/Tablet Section - Now with video animation */}
       <div 
-        className="hidden md:flex lg:hidden min-h-[170vh] h-screen bg-white flex-col justify-center items-center"
+        ref={desktopSectionRef}
+        className="hidden md:flex lg:hidden relative w-screen"
+        style={{ height: "100vh" }}
       >
-        <div className="mt-[-8vh] flex justify-center tablet-text">
-          <h1 className="text-[55vw] font-bold text-black rotate-90 leading-none">
-            Infocus Media <span className="text-[12vw] align-super">®</span>
-          </h1>
+        {/* Desktop Text Section - Inside pinned container */}
+        <div 
+          ref={desktopTextSectionRef}
+          className="absolute inset-0 bg-white flex flex-col justify-center items-center z-10 "
+        >
+          <div className="flex justify-center items-center desktop-text w-full h-fit">
+            <img src={"/logo-black-vertical-2.svg"} />
+          </div>
+        </div>
+
+        {/* Desktop Video - Inside pinned container */}
+        <video
+          ref={desktopVideoRef}
+          className="absolute inset-0 z-20 w-full h-full object-cover"
+          src="/media-hero.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          style={{
+            width: "100vw",
+            height: "100vh",
+            minWidth: "100vw",
+            minHeight: "100vh",
+            objectFit: "cover",
+          }}
+        />
+
+        {/* Desktop Content overlay - Inside pinned container */}
+        <div
+          ref={desktopContentOverlayRef}
+          className="absolute inset-0 flex flex-col items-center justify-center text-center px-8 pointer-events-none z-30"
+        >
+          <img
+            src="/logo.png"
+            alt="Logo"
+            className="logo-fade w-[60%] max-w-[400px] h-auto mb-6 object-contain"
+          />
+          <p
+            className="text-fade uppercase text-white text-[18px] mb-2"
+            style={{
+              fontFamily: "'Almarai', sans-serif",
+              fontWeight: 600,
+              letterSpacing: "0.02em",
+              lineHeight: 1.2,
+              textShadow: "0 2px 4px rgba(0,0,0,0.5)",
+            }}
+          >
+            Born from Emirati soil, our roots run deep
+          </p>
+          <p
+            className="text-fade uppercase text-white text-[18px]"
+            style={{
+              fontFamily: "'Almarai', sans-serif",
+              fontWeight: 600,
+              letterSpacing: "0.02em",
+              lineHeight: 1.2,
+              textShadow: "0 2px 4px rgba(0,0,0,0.5)",
+            }}
+          >
+            and our vision soars high
+          </p>
         </div>
       </div>
 
@@ -157,12 +338,9 @@ export default function TabletSection() {
           ref={mobileTextSectionRef}
           className="absolute inset-0 bg-white flex flex-col justify-center items-center z-10"
         >
-          <div className="flex justify-center items-center mobile-text w-full h-full">
-            <div className="transform rotate-90 origin-center">
-              <h1 className="text-[60vw]   xs:text-[75vw] sm:text-[80vw] font-bold text-black whitespace-nowrap leading-none pr-50   py-[20vh]">
-                Infocus Media<sup>®</sup>    
-              </h1>
-            </div>
+          <div className="flex justify-center items-center mobile-text w-full h-fit">
+              <img src={"/logo-black-vertical.svg"} />
+            
           </div>
         </div>
 

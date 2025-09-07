@@ -27,7 +27,7 @@ const TransformGlobe = () => {
       // Set initial states
       gsap.set(insightContent, { opacity: 0, y: 50, scale: 0.9 });
       gsap.set(transformContent, { opacity: 0, y: 30, scale: 0.95 });
-      gsap.set(background, { 
+      gsap.set(background, {
         opacity: 0,
         backgroundSize: "50% auto"
       });
@@ -62,7 +62,7 @@ const TransformGlobe = () => {
           background,
           {
             backgroundSize: "150% auto",
-            duration: 2, 
+            duration: 2,
             ease: "none",
           },
           0
@@ -139,13 +139,14 @@ const TransformGlobe = () => {
   return (
     <section
       ref={sectionRef}
-      className="TransformGlobe relative h-screen overflow-hidden bg-white"
+      className="TransformGlobe relative h-screen overflow-hidden bg-white opacity-100 w-screen"
       style={{
         zIndex: 1,
         marginTop: 0,
         paddingTop: 0,
       }}
     >
+        <div className={"bg-white min-h-screen w-screen"}>
       {/* Image Background */}
       <div
         ref={backgroundRef}
@@ -204,6 +205,7 @@ const TransformGlobe = () => {
           </Link>
         </div>
       </div>
+        </div>
     </section>
   );
 };

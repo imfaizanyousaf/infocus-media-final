@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useNavbar } from "@/context/NavBarContext";
@@ -10,7 +10,6 @@ gsap.registerPlugin(ScrollTrigger);
 export default function TabletSection() {
   const { setIsNavbarVisible } = useNavbar();
   const mobileVideoRef = useRef(null);
-  const mobileVideoSectionRef = useRef(null);
   const mobileContentOverlayRef = useRef(null);
   const mobileTextSectionRef = useRef(null);
   const mobileSectionRef = useRef(null);
@@ -171,7 +170,7 @@ export default function TabletSection() {
     // Set initial text position - position to show "I" first
     if (mobileTextElement) {
       // Calculate offset to show "I" at the start, with extra whitespace above if needed
-      const textOffset = window.innerHeight * 1.5; // Start further down to show "I" first
+      const textOffset = window.innerHeight * 2; // Start further down to show "I" first
       gsap.set(mobileTextElement, { 
         y: textOffset // Since text is rotated 90deg, y controls horizontal position
       });
@@ -201,8 +200,8 @@ export default function TabletSection() {
           if (mobileTextElement && progress <= 0.8) {
             const textProgress = progress / 0.8;
             // Since text is rotated 90deg, y controls horizontal movement
-            const initialOffset = window.innerHeight * 1.5; // Start further down to show "I" first
-            const textY = initialOffset - (textProgress * window.innerHeight * 3); // Faster scroll with more distance
+            const initialOffset = window.innerHeight * 2; // Start further down to show "I" first
+            const textY = initialOffset - (textProgress * window.innerHeight * 4); // Faster scroll with more distance
             gsap.set(mobileTextElement, { y: textY });
           }
           
@@ -267,7 +266,7 @@ export default function TabletSection() {
           className="absolute inset-0 bg-white flex flex-col justify-center items-center z-10 "
         >
           <div className="flex justify-center items-center desktop-text w-full h-fit">
-            <img src={"/logo-black-vertical-2.svg"} />
+            <img src={"/logo-black-vertical-2.svg"} alt={""} />
           </div>
         </div>
 
@@ -339,7 +338,7 @@ export default function TabletSection() {
           className="absolute inset-0 bg-white flex flex-col justify-center items-center z-10"
         >
           <div className="flex justify-center items-center mobile-text w-full h-fit">
-              <img src={"/logo-black-vertical.svg"} />
+              <img src={"/logo-black-vertical.svg"} alt={""} />
             
           </div>
         </div>

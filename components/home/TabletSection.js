@@ -56,7 +56,7 @@ export default function TabletSection() {
 
     // Set initial text position
     if (desktopTextElement) {
-      const textOffset = window.innerHeight * 0.3
+      const textOffset = window.innerHeight/2
       gsap.set(desktopTextElement, { 
         y: textOffset // Desktop uses normal vertical positioning
       });
@@ -171,7 +171,7 @@ export default function TabletSection() {
     // Set initial text position - position to show "I" first
     if (mobileTextElement) {
       // Calculate offset to show "I" at the start, with extra whitespace above if needed
-      const textOffset = window.innerHeight * 1.03; // Start further down to show "I" first
+      const textOffset = window.innerHeight * 1.5; // Start further down to show "I" first
       gsap.set(mobileTextElement, { 
         y: textOffset // Since text is rotated 90deg, y controls horizontal position
       });
@@ -201,8 +201,8 @@ export default function TabletSection() {
           if (mobileTextElement && progress <= 0.8) {
             const textProgress = progress / 0.8;
             // Since text is rotated 90deg, y controls horizontal movement
-            const initialOffset = window.innerHeight * 1.03; // Start further down to show "I" first
-            const textY = initialOffset - (textProgress * window.innerHeight * 1.95); // Faster scroll with more distance
+            const initialOffset = window.innerHeight * 1.5; // Start further down to show "I" first
+            const textY = initialOffset - (textProgress * window.innerHeight * 3); // Faster scroll with more distance
             gsap.set(mobileTextElement, { y: textY });
           }
           

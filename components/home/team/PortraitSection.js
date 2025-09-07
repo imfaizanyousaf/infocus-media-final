@@ -44,7 +44,7 @@ const SheikhCaseStudiesContainer = () => {
   return (
     <section className="relative w-full">
       {/* Fixed Portrait Section */}
-      <div className="fixed inset-0 w-full h-screen -z-10">
+      <div className="fixed inset-0 top-30 w-full h-screen -z-10">
         <div className="w-full h-full flex flex-col-reverse lg:flex-row lg:items-center gap-10 bg-white">
           {/* Image Container */}
           <div className="w-full md:w-2/3 h-full">

@@ -84,7 +84,7 @@ const SheikhCaseStudiesContainer = () => {
       </div>
 
       {/* Spacer to allow portrait to be seen first */}
-      <div className="h-[130vh]"></div>
+      <div className="h-screen"></div>
 
       {/* Foreground Section appears after portrait */}
       <div className="relative z-10">

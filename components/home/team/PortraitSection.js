@@ -88,7 +88,7 @@ const SheikhCaseStudiesContainer = () => {
 
       {/* Foreground Section appears after portrait */}
       <div className="relative z-10">
-        <div className="min-h-screen bg-white">
+        <div className="min-h-[130vh] bg-white">
           <CaseStudies />
         </div>
       </div>

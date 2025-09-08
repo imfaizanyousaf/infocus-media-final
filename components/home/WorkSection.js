@@ -90,7 +90,7 @@ const WorkSection = () => {
 
         <div
           ref={containerRef}
-          className="grid grid-cols-2 lg:grid-cols-7 w-full md:pl-11 pl-5 items-center justify-items-center-safe gap-8"
+          className="grid grid-cols-2 lg:grid-cols-7 w-full md:pl-11 pl-5 items-center justify-items-center-safe gap-2"
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
@@ -115,12 +115,12 @@ const WorkSection = () => {
                   height={500}
                   src={service.icon}
                   alt={service.title}
-                  className="w-[70px] h-[70px] md:w-[76px] md:h-[76px] lg:w-[90px] lg:h-[90px] object-contain mb-4 transition-transform duration-300"
+                  className="w-[70px] h-[70px] md:w-[76px] md:h-[76px] lg:w-[80px] lg:h-[80px] object-contain mb-4 transition-transform duration-300"
                   style={{
                     filter: scale > 1.2 ? "brightness(1.1) saturate(1.2)" : "none"
                   }}
                 />
-                <h3 className="font-bold text-left text-black mb-3 mt-2 text-[16px] md:text-[18px] lg:text-[22px] pr-8 leading-[.95] sub-heading tracking-wide">
+                <h3 className="font-bold text-left text-black mb-3 mt-2 text-[16px] md:text-[18px] lg:text-[20px] pr-8 leading-[.95] sub-heading tracking-wide">
                   {service.title}
                 </h3>
               </div>

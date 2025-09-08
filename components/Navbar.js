@@ -442,10 +442,15 @@ const Navbar = ({ navbarVisible = true }) => {
       {/* Navbar */}
       <nav
         ref={navbarRef}
-        className={`fixed  left-0 w-full sm:h-[48px] z-50 px-4 sm:px-6 py-7 sm:py-10 flex items-center justify-between transition-all ${
-          !menuOpen ? "bg-white/50 backdrop-blur-lg" : "bg-transparent"
-        } ${navbarVisible ? "translate-y-0" : "-translate-y-full"}`}
+        className={`fixed left-0 w-full sm:h-[48px] z-50 px-4 sm:px-6 py-7 sm:pt-10 sm:pb-24 flex items-center justify-between transition-all
+          ${
+            !menuOpen
+              ? "bg-gradient-to-b from-white/80 via-white/20 to-white/0 backdrop-blur-lg [mask-image:linear-gradient(to_bottom,white_50%,transparent_100%)]"
+              : "bg-transparent"
+          }
+          ${navbarVisible ? "translate-y-0" : "-translate-y-full"}`}
       >
+
         {/* Logo with ref */}
         <div
           ref={logoRef}

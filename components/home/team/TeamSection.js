@@ -33,7 +33,7 @@ const TeamSection = () => {
   }, []); // Remove isVisible from dependency array
 
   return (
-    <section ref={sectionRef} className="py-26 px-6 bg-white">
+    <section ref={sectionRef} className="py-26 px-6 -mt-1 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">

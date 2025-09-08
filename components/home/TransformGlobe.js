@@ -119,15 +119,6 @@ const TransformGlobe = () => {
           },
           1.8
         )
-        .to(
-          background,
-          {
-            opacity: 0,
-            duration: 0.4,
-            ease: "power2.in",
-          },
-          2
-        );
     }, 100);
 
     return () => {
@@ -139,7 +130,7 @@ const TransformGlobe = () => {
   return (
     <section
       ref={sectionRef}
-      className="TransformGlobe relative h-screen overflow-hidden bg-white opacity-100 w-screen"
+      className="relative h-screen overflow-hidden bg-white opacity-100 w-screen"
       style={{
         zIndex: 1,
         marginTop: 0,

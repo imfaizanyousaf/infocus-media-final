@@ -58,3 +58,5 @@ build/
 
 # Cloudinary temp files (if any used locally)
 cloudinary-temp/
+
+.idea

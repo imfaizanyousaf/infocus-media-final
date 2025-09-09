@@ -15,6 +15,7 @@ const SheikhCaseStudiesContainer = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const portraitRef = useRef(null);
   const contentRef = useRef(null);
+  const spacerRef = useRef(null);
 
   const words = ["design", "imagine"];
 
@@ -47,24 +48,45 @@ const SheikhCaseStudiesContainer = () => {
     }
   }, [displayText, isDeleting, currentWord, words]);
 
-  // Parallax effect with GSAP
+  // Parallax effect with GSAP and opacity control
   useEffect(() => {
     let ctx = gsap.context(() => {
-      if (portraitRef.current && contentRef.current) {
+      if (portraitRef.current && contentRef.current && spacerRef.current) {
+        // Parallax animation for the portrait
         gsap.to(portraitRef.current, {
           y: () => {
             // Calculate dynamic movement based on content height
             const contentHeight = contentRef.current.offsetHeight;
-            return -contentHeight * 0.2; // Move 30% of content height
+            return -contentHeight * 0.2; // Move 20% of content height
           },
           ease: "none",
           scrollTrigger: {
             trigger: contentRef.current,
-            start: "top center", // Start when content top hits viewport bottom
-            end: "bottom top", // End when content bottom hits viewport top
-            scrub: 0.5, // Smoothly follows scroll with slight lag
+            start: "top center",
+            end: "bottom top",
+            scrub: 0.5,
             invalidateOnRefresh: true,
-            anticipatePin: 1, // Ensures fixed positioning works smoothly
+            anticipatePin: 1,
+          },
+        });
+
+        // Opacity animation based on spacer visibility
+        ScrollTrigger.create({
+          trigger: spacerRef.current,
+          start: "top bottom", // When spacer top hits viewport bottom
+          end: "bottom top", // When spacer bottom hits viewport top
+          invalidateOnRefresh: true,
+          onEnter: () => {
+            gsap.set(portraitRef.current, { opacity: 1 });
+          },
+          onLeave: () => {
+            gsap.set(portraitRef.current, { opacity: 0 });
+          },
+          onEnterBack: () => {
+            gsap.set(portraitRef.current, { opacity: 1 });
+          },
+          onLeaveBack: () => {
+            gsap.set(portraitRef.current, { opacity: 0 });
           },
         });
       }
@@ -84,7 +106,10 @@ const SheikhCaseStudiesContainer = () => {
   return (
     <section className="relative w-full">
       {/* Fixed Portrait Section with Parallax */}
-      <div ref={portraitRef} className="fixed inset-0 w-full h-screen -z-10">
+      <div
+        ref={portraitRef}
+        className="fixed inset-0 w-full h-screen -z-10 opacity-0"
+      >
         <div className="w-full h-full flex flex-col lg:flex-row justify-center items-center gap-10 bg-white">
           {/* Image Container */}
           <div className="w-full md:w-2/3 h-full">
@@ -126,7 +151,7 @@ const SheikhCaseStudiesContainer = () => {
       {/* Content Section (Spacer + Foreground) */}
       <div ref={contentRef}>
         {/* Spacer to allow portrait to be seen first */}
-        <div className="h-[60vh]"></div>
+        <div ref={spacerRef} className="h-[60vh]"></div>
 
         {/* Foreground Section appears after portrait */}
         <div className="relative z-10">

@@ -29,7 +29,8 @@ const TransformGlobe = () => {
       gsap.set(transformContent, { opacity: 0, y: 30, scale: 0.95 });
       gsap.set(background, {
         opacity: 0,
-        backgroundSize: "50% auto"
+        backgroundSize: "250% auto",
+        filter: "blur(100px)"
       });
 
       // Create GSAP timeline with ScrollTrigger
@@ -61,7 +62,8 @@ const TransformGlobe = () => {
         .to(
           background,
           {
-            backgroundSize: "150% auto",
+            backgroundSize: "50% auto",
+            filter: "blur(5px)",
             duration: 2,
             ease: "none",
           },
@@ -140,7 +142,7 @@ const TransformGlobe = () => {
       {/* Image Background */}
       <div
         ref={backgroundRef}
-        className="absolute inset-0 w-full h-full bg-[url(/blob-poster.png)] bg-no-repeat bg-center"
+        className="absolute inset-0 w-full h-full bg-[url(/blob-poster-2.jpg)] bg-no-repeat bg-center"
         style={{
           willChange: "background-size, opacity",
           top: 0,

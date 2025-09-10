@@ -106,11 +106,8 @@ const SheikhCaseStudiesContainer = () => {
   return (
     <section className="relative w-full">
       {/* Fixed Portrait Section with Parallax */}
-      <div
-        ref={portraitRef}
-        className="fixed inset-0 w-full h-screen -z-10 opacity-0"
-      >
-        <div className="w-full h-full flex flex-col lg:flex-row justify-center items-center gap-10 bg-white">
+      <div ref={portraitRef} className="fixed inset-0 w-full h-screen -z-10 mt-48 -mb-32 lg:mt-0 lg:mb-0">
+        <div className="w-full h-full flex flex-col-reverse lg:flex-row justify-center items-center gap-10 bg-white">
           {/* Image Container */}
           <div className="w-full md:w-2/3 h-1/2 lg:h-full">
             <Image

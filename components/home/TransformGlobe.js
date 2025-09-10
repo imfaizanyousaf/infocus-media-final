@@ -62,7 +62,7 @@ const TransformGlobe = () => {
         .to(
           background,
           {
-            backgroundSize: "50% auto",
+            backgroundSize: "70% auto",
             filter: "blur(5px)",
             duration: 2,
             ease: "none",
@@ -110,17 +110,17 @@ const TransformGlobe = () => {
         // Hold time for insight content
         .to({}, { duration: 0.4 })
         // Insight content exit animation
-        .to(
-          insightContent,
-          {
-            opacity: 0,
-            y: -30,
-            scale: 1.1,
-            duration: 0.3,
-            ease: "power2.in",
-          },
-          1.8
-        )
+        // .to(
+        //   insightContent,
+        //   {
+        //     opacity: 0,
+        //     y: -30,
+        //     scale: 1.1,
+        //     duration: 0.3,
+        //     ease: "power2.in",
+        //   },
+        //   1.8
+        // )
     }, 100);
 
     return () => {

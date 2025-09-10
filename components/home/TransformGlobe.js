@@ -1,5 +1,5 @@
 "use client";
-
+// TransformGlobe.js
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";

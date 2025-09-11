@@ -8,7 +8,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const FooterGlobe = () => {
   const sectionRef = useRef(null);
-  const backgroundRef = useRef(null);
   const subtitleRef = useRef(null);
   const mainContentRef = useRef(null);
   const buttonRef = useRef(null);
@@ -18,21 +17,14 @@ const FooterGlobe = () => {
     // Small delay to ensure other GSAP animations have initialized
     const initTimeout = setTimeout(() => {
       const section = sectionRef.current;
-      const background = backgroundRef.current;
       const subtitle = subtitleRef.current;
       const mainContent = mainContentRef.current;
       const button = buttonRef.current;
       const particles = particlesRef.current;
 
-      if (!section || !background || !subtitle || !mainContent || !button)
+      if (!section || !subtitle || !mainContent || !button)
         return;
 
-      // Set initial states - using same image background animation as TransformGlobe
-      gsap.set(background, {
-        opacity: 0,
-        backgroundSize: "250% auto",
-        filter: "blur(100px)"
-      });
       gsap.set(subtitle, { opacity: 0, y: 50, scale: 0.9 });
       gsap.set(mainContent, { opacity: 0, y: 30, scale: 0.95 });
       gsap.set(button, { opacity: 0, scale: 0 });
@@ -43,7 +35,7 @@ const FooterGlobe = () => {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=1000",
+          end: "+=500",
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -54,28 +46,7 @@ const FooterGlobe = () => {
         },
       });
 
-      // Animation sequence with same background animation as TransformGlobe
       tl
-        // Background enter animation - same as TransformGlobe
-        .to(
-          background,
-          {
-            opacity: 1,
-            duration: 0.1,
-            ease: "power2.out",
-          },
-          0
-        )
-        .to(
-          background,
-          {
-            backgroundSize: "70% auto",
-            filter: "blur(5px)",
-            duration: 2,
-            ease: "none",
-          },
-          0
-        )
         // Subtitle enter animation
         .to(
           subtitle,
@@ -159,13 +130,7 @@ const FooterGlobe = () => {
     >
       {/* Image Background - same as TransformGlobe */}
       <div
-        ref={backgroundRef}
-        className="absolute inset-0 w-full h-full bg-[url(/blob-poster-2.jpg)] bg-no-repeat bg-center"
-        style={{
-          willChange: "background-size, opacity",
-          top: 0,
-          left: 0,
-        }}
+        className="absolute inset-0 w-full h-full bg-white"
       />
 
       {/* Main Content */}

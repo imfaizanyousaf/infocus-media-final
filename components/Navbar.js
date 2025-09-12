@@ -49,6 +49,7 @@ const Navbar = ({ navbarVisible = true }) => {
   const rafId = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [logoWhite, setLogoWhite] = useState(false);
+  const [isDarkSection, setIsDarkSection] = useState(false);
 
   // Force check on route change
   useEffect(() => {
@@ -71,7 +72,20 @@ const Navbar = ({ navbarVisible = true }) => {
     };
   }, []);
 
-  // Optimized debounce with trend analysis
+    useEffect(() => {
+        const handleNavbarTheme = (event) => {
+            const { theme, sectionId } = event.detail;
+
+            setIsDarkSection(theme==="dark");
+            console.log("setting navbar theme", theme, sectionId)
+        };
+        window.addEventListener('navbar-theme-change', handleNavbarTheme);
+        return () => {
+            window.removeEventListener('navbar-theme-change', handleNavbarTheme);
+        };
+    }, []);
+
+    // Optimized debounce with trend analysis
   const debouncedSetDarkBg = useCallback((value) => {
     if (checkTimeoutRef.current) {
       clearTimeout(checkTimeoutRef.current);
@@ -459,7 +473,7 @@ const Navbar = ({ navbarVisible = true }) => {
           <Link href={"/"}>
             {/* Black logo as fallback */}
             <Image
-              src={menuOpen ? "/logo.png" : "/logo-black.png"}
+              src={(menuOpen||isDarkSection) ? "/logo.png" : "/logo-black.png"}
               alt="Infocus Media Logo"
               width={250}
               height={68}

@@ -1,11 +1,19 @@
 "use client";
 import React from "react";
 import CountUp from "react-countup";
+import {useNavbarThemeById} from "@/hooks/useNavbarTheme";
 
 const HeroSection = () => {
+    const options = {
+        threshold: 0,
+        rootMargin: '15% 0px -60% 0px',
+        triggerOnMount:  false
+    };
+    useNavbarThemeById('story', 'dark', options);
   return (
     <div
       data-bg="dark"
+      id={"story"}
       className="relative w-full h-[1400px] min-h-screen bg-black text-white overflow-hidden flex flex-col justify-between"
     >
       {/* Center Content */}

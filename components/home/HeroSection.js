@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useNavbar } from "@/context/NavBarContext";
 import { logoPath } from "@/utils/logoPath";
+import {useNavbarThemeById} from "@/hooks/useNavbarTheme";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -232,7 +233,7 @@ export default function HeroSection() {
   return (
     <div
       ref={sectionRef}
-      className="relative w-screen overflow-hidden"
+      className="relative w-screen overflow-hidden bg-white"
       style={{ height: "100vh" }}
     >
       {/* First Video Element - Main background video */}

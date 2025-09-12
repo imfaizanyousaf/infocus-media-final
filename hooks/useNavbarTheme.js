@@ -51,6 +51,7 @@ export const useNavbarThemeById = (elementId, theme, options = {}) => {
 
         return () => {
             observer.unobserve(element);
+            dispatchNavbarTheme(theme ==="dark" ? "light" : "dark", elementId);
         };
     }, [elementId, theme, threshold, rootMargin, triggerOnMount]);
 };

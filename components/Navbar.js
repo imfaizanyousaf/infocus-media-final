@@ -77,7 +77,6 @@ const Navbar = ({ navbarVisible = true }) => {
             const { theme, sectionId } = event.detail;
 
             setIsDarkSection(theme==="dark");
-            console.log("setting navbar theme", theme, sectionId)
         };
         window.addEventListener('navbar-theme-change', handleNavbarTheme);
         return () => {

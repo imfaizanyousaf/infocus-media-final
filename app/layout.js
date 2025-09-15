@@ -7,6 +7,8 @@ import { Almarai } from "next/font/google";
 import { NavbarProvider, useNavbar } from "@/context/NavBarContext";
 import NavbarWrapper from "@/components/navbarWrapper";
 import { ToastContainer } from 'react-toastify';
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 const almarai = Almarai({
   subsets: ["arabic"],
   weight: ["300", "400", "700", "800"],
@@ -39,7 +41,7 @@ export default function RootLayout({ children }) {
       <body className={`relative`}>
         {/* 👇 Fixed background layer for mix-blend-difference to work */}
         {/* <div className="fixed inset-0 z-0 bg-red" /> */}
-
+        <SpeedInsights/>
         <AuthProvider>
           <NavbarProvider>
             <NavbarWrapper />

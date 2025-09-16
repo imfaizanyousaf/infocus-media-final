@@ -20,19 +20,11 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const handleLoad = () => {
+    const timer = setTimeout(() => {
       setIsLoading(false);
-    };
+    }, 5000);
 
-    if (document.readyState === "complete") {
-      setIsLoading(false);
-    } else {
-      window.addEventListener("load", handleLoad);
-    }
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {

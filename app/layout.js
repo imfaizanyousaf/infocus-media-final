@@ -41,7 +41,6 @@ export default function RootLayout({ children }) {
       <body className={`relative`}>
         {/* 👇 Fixed background layer for mix-blend-difference to work */}
         {/* <div className="fixed inset-0 z-0 bg-red" /> */}
-        <SpeedInsights/>
         <AuthProvider>
           <NavbarProvider>
             <NavbarWrapper />
@@ -64,6 +63,7 @@ export default function RootLayout({ children }) {
             />
           </NavbarProvider>
         </AuthProvider>
+        <SpeedInsights/>
       </body>
     </html>
   );

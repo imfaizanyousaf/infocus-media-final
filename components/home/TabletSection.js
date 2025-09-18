@@ -251,17 +251,15 @@ export default function TabletSection() {
   }, [setIsNavbarVisible]);
 
   return (
-    <div
-      className="relative w-screen overflow-hidden"
-    >
+    <div className="relative w-screen overflow-hidden">
       {/* Desktop/Tablet Section - Now with video animation */}
-      <div 
+      <div
         ref={desktopSectionRef}
         className="hidden md:flex lg:hidden relative w-screen"
         style={{ height: "100vh" }}
       >
         {/* Desktop Text Section - Inside pinned container */}
-        <div 
+        <div
           ref={desktopTextSectionRef}
           className="absolute inset-0 bg-white flex flex-col justify-center items-center z-10 "
         >
@@ -273,9 +271,10 @@ export default function TabletSection() {
         {/* Desktop Video - Inside pinned container */}
         <video
           ref={desktopVideoRef}
-          className="absolute inset-0 z-20 w-full h-full object-cover"
+          className="absolute inset-0 z-20 w-full h-full object-cover bg-white"
           src="/media-hero.mp4"
           autoPlay
+          poster="/ui-poster.PNG"
           loop
           muted
           playsInline
@@ -327,27 +326,27 @@ export default function TabletSection() {
       </div>
 
       {/* Mobile Section - Pinned container like desktop */}
-      <div 
+      <div
         ref={mobileSectionRef}
         className="md:hidden relative w-screen"
         style={{ height: "100vh" }}
       >
         {/* Mobile Text Section - Inside pinned container */}
-        <div 
+        <div
           ref={mobileTextSectionRef}
           className="absolute inset-0 bg-white flex flex-col justify-center items-center z-10"
         >
           <div className="flex justify-center items-center mobile-text w-full h-fit">
-              <img src={"/logo-black-vertical.svg"} alt={""} />
-            
+            <img src={"/logo-black-vertical.svg"} alt={""} />
           </div>
         </div>
 
         {/* Mobile Video - Inside pinned container */}
         <video
           ref={mobileVideoRef}
-          className="absolute inset-0 z-20 w-full h-full object-cover"
+          className="absolute inset-0 z-20 w-full h-full object-cover bg-white"
           src="/media-hero.mp4"
+          poster="/ui-poster.PNG"
           autoPlay
           loop
           muted

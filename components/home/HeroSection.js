@@ -240,7 +240,7 @@ export default function HeroSection() {
       <video
         ref={videoRef}
         className="absolute inset-0 z-0 w-screen h-screen object-cover"
-        src="/media-hero.mp4"
+        src="/final2.mp4"
         poster="/ui-poster.PNG"
         autoPlay
         loop
@@ -260,7 +260,7 @@ export default function HeroSection() {
       <video
         ref={secondVideoRef}
         className="absolute inset-0 z-50 w-screen h-screen object-cover"
-        src="/media-hero.mp4"
+        src="/final2.mp4"
         poster="/ui-poster.PNG"
         autoPlay
         loop

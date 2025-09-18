@@ -272,7 +272,7 @@ export default function TabletSection() {
         <video
           ref={desktopVideoRef}
           className="absolute inset-0 z-20 w-full h-full object-cover bg-white"
-          src="/final2.mp4"
+          src="/media-hero.mp4"
           autoPlay
           poster="/ui-poster.PNG"
           loop
@@ -345,7 +345,7 @@ export default function TabletSection() {
         <video
           ref={mobileVideoRef}
           className="absolute inset-0 z-20 w-full h-full object-cover bg-white"
-          src="/final2.mp4"
+          src="/media-hero.mp4"
           poster="/ui-poster.PNG"
           autoPlay
           loop

@@ -140,7 +140,7 @@ const FooterGlobe = () => {
           ref={subtitleRef}
           className="text-[16px] md:text-[18px] lg:text-[22px] font-bold uppercase tracking-widest mb-1 sub-heading text-black"
         >
-          HAVE PROJECT IN MIND?
+          HAVE A PROJECT IN MIND?
         </p>
 
         {/* Main Headlines */}

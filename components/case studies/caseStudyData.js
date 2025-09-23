@@ -1,7 +1,7 @@
 const data = [
   {
     title: "COVID-19",
-    description: "Educating the World about COVID-19 with the Ministry of Health and Prevention",
+    description: "Educating the world about COVID-19 with the Ministry of Health And Prevention",
     image: "/assets/Case studies/COVID-19.jpg",
     detailTitle: "EDUCATING THE WORLD ABOUT COVID-19 WITH THE MINISTRY OF HEALTH AND PREVENTION",
     detailDescription: "At the onset of the unprecedented COVID-19 pandemic, relevant organizations, especially those in the health sector, faced a SIGNIFICANT challenge: to deliver timely news updates with the latest resources in the aftermath of the crisis, in addition to educating the public about the unfamiliar virus."
@@ -42,7 +42,7 @@ const data = [
     detailDescription: "InFocus Media's branding journey with Al Ghaith Group, building a legacy for future generations."
   },
   {
-    title: "7X x Sikka",
+    title: "7X x SIKKA",
     description: "Fusing Tradition and Innovation. The 7X-Sikka Campaign with Artists by InFocus Media",
     image: "/assets/Case studies/7X x Sikka.jpg",
     detailTitle: "FUSING TRADITION AND INNOVATION",

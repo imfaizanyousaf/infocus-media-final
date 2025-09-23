@@ -48,7 +48,7 @@ const CaseStudyDetail = () => {
       {/* The Navbar will always remain at the top. No logic to hide or pop up. */}
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 pt-32 pb-8">
         <h2 className="text-center text-sm sm:text-base lg:text-lg font-bold tracking-widest mb-2 mt-4 sm:mt-8">CASE STUDY</h2>
-        <h1 className="text-center text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 px-2">{selected.title.toUpperCase()}</h1>
+        <h1 className="text-center text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 sm:mb-8 px-2">{selected.title}</h1>
         <div className="w-full mb-6 sm:mb-8">
           <Image
             src={selected.image}
@@ -108,7 +108,7 @@ const CaseStudyDetail = () => {
 
                 {/* Title and Description */}
                 <div className="mt-2 px-1">
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-1 sm:mb-2">{item.title.toUpperCase()}</h3>
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-1 sm:mb-2">{item.title}</h3>
                   <p className="text-gray-700 text-sm sm:text-base lg:text-lg leading-relaxed sub-heading">{item.description}</p>
                 </div>
               </div>

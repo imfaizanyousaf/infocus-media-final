@@ -1,12 +1,15 @@
 import axios from "axios";
 
 const upload = async (file) => {
+  const instance = axios.create();
+
   const data = new FormData();
   data.append("file", file);
   data.append("upload_preset", "fiverr"); // Your unsigned preset name
 
   try {
-    const res = await axios.post(
+    console.log(data.get("upload_preset"));
+    const res = await instance.post(
       "https://api.cloudinary.com/v1_1/dc3ytk5jo/image/upload", // Notice `/image/upload`
       data,
       {
